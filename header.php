@@ -19,7 +19,7 @@
 		
         <div id="userbar">
 		<?php
-        if($_SESSION['signed_in'])
+        if($_SESSION['signed_in'] == true)
  	    {
  	 	    echo 'Hello' . $_SESSION['user_name'] . '. Not you? <a href="signout.php">Sign out</a>';
  	    }
