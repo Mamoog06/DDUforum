@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #333;
+  color: #fff;
+  font-size: 14px;
+}
+
+.footer-info,
+.footer-social,
+.footer-about {
+  width: 30;
+}
+
+.footer-social ul {
+  grid-template-columns: 2fr 2fr;
+  list-style: none;
+  padding-left: 10px;
+}
