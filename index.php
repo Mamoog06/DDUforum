@@ -1,13 +1,6 @@
-<html>
-<body>
-
 <?php
-
-include 'DDUforum/Connection.php';
-include 'DDUforum/header.php';
-include 'DDUforum/footer.php'
+session_start();
+include 'connection.php';
+include 'header.php';
+include 'footer.php';
 ?>
-
-</body>
-</html>
-
