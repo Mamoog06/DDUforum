@@ -14,8 +14,16 @@
 	<div id="wrapper">
 	<div id="menu">
 		<a class="item" href="index.php">Home</a> -
-		<a class="item" href="create_post.php">Create a post</a> -
-		<a class="item" href="create_cat.php">Create a category</a>
+		<?php
+		if($_SESSION['signed_in'] == true)
+		{
+			echo '<a href="create_post.php">Create a post</a>';
+		}
+		if($_SESSION['signed_in'] == true && $_SESSION['user_level'] == 1)
+		{
+			echo '<a href="create_cat.php">Create a category</a>';
+		}
+		?>
 		
         <div id="userbar">
 		<?php
