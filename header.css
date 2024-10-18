@@ -6,6 +6,7 @@
 
 header {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   padding: 10px;
   background-color: #f2f2f2;
@@ -16,6 +17,7 @@ header {
 header .logo {
   font-size: 24px;
   font-weight: bold;
+  margin-right: 100px;
 }
 
 header .profile {
@@ -24,4 +26,20 @@ header .profile {
 
 header .profile a:visited {
   color: inherit;
+}
+
+header .search-container {
+  flex-grow: 1; /* Allows it to grow */
+  max-width: 500px; /* Prevents it from becoming too wide */
+  margin-right: auto;
+}
+
+header .search-container input[type="text"] {
+  width: 100%;
+  font-size: 20px;
+  border: none;
+  background-color: #f2f2f2;
+  outline: none;
+  border-radius: 0;
+  box-shadow: none;
 }

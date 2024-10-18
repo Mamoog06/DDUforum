@@ -12,7 +12,9 @@
 
 <body>
     <header>
-        <div class="logo">Logo</div>
+        <div class="logo">
+            <a href="home.php" style="text-decoration: none; color: inherit">Logo</a>
+        </div>
         <div class="profile">
             <a href="profile.php" style="text-decoration: none; color: inherit">Profile</a>
         </div>

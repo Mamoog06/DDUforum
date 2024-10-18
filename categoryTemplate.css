@@ -1,0 +1,86 @@
+.category-page {
+    padding: 20px;
+}
+
+.category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.category-header h1 {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.new-post-btn {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.new-post-btn:hover {
+    background-color: #218838;
+}
+
+.category-line {
+    border: 1px solid #ddd;
+    margin: 10px 0;
+}
+
+.category-description {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.topic-list {
+    margin-top: 20px;
+}
+
+.topic-box {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Align items to the top */
+}
+
+.topic-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.topic-title a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.topic-title a:hover {
+    text-decoration: underline;
+}
+
+.topic-meta {
+    flex-grow: 1; /* Allow the title and author to take full width */
+}
+
+.topic-meta span {
+    display: block; /* Stack author name below the title */
+    font-size: 14px;
+    color: #666;
+    margin-top: 3px;
+}
+
+.replies-views {
+    display: flex;
+    flex-direction: column; /* Stack the replies and views */
+    text-align: right;
+    font-size: 14px;
+    color: #666;
+}

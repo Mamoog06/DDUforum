@@ -4,12 +4,6 @@
   box-sizing: border-box;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  background-color: #fdfdfd;
-  color: #333;
-}
-
 .search-container {
   display: flex;
   justify-content: center;
