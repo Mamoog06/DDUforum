@@ -9,8 +9,8 @@ header {
   align-items: center;
   justify-content: space-between;
   padding: 10px;
-  background-color: #f2f2f2;
-  color: #333;
+  background-color: #8B0000 ;
+  color: #f2f2f2;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
@@ -29,16 +29,16 @@ header .profile a:visited {
 }
 
 header .search-container {
-  flex-grow: 1; /* Allows it to grow */
-  max-width: 500px; /* Prevents it from becoming too wide */
+  flex-grow: 1;
+  max-width: 500px;
   margin-right: auto;
 }
 
-header .search-container input[type="text"] {
+header .search-container input[type="text"]{
   width: 100%;
   font-size: 20px;
   border: none;
-  background-color: #f2f2f2;
+  background-color: #8B0000 ;
   outline: none;
   border-radius: 0;
   box-shadow: none;

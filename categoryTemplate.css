@@ -48,7 +48,7 @@
     background-color: #f9f9f9;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start; /* Align items to the top */
+    align-items: flex-start;
 }
 
 .topic-title {
@@ -67,11 +67,11 @@
 }
 
 .topic-meta {
-    flex-grow: 1; /* Allow the title and author to take full width */
+    flex-grow: 1;
 }
 
 .topic-meta span {
-    display: block; /* Stack author name below the title */
+    display: block;
     font-size: 14px;
     color: #666;
     margin-top: 3px;
@@ -79,7 +79,7 @@
 
 .replies-views {
     display: flex;
-    flex-direction: column; /* Stack the replies and views */
+    flex-direction: column;
     text-align: right;
     font-size: 14px;
     color: #666;

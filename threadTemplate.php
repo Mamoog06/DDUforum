@@ -110,7 +110,6 @@
     </footer>
 
     <script>
-        // Function to toggle replies visibility
         document.querySelectorAll('.show-hide-replies').forEach(function(toggle) {
             toggle.addEventListener('click', function() {
                 const targetId = this.getAttribute('data-target');
@@ -124,10 +123,8 @@
                 }
             });
         });
-
-        // Initialize: hide nested replies on page load
         document.querySelectorAll('.nested-reply').forEach(function(reply) {
-            reply.style.display = 'none'; // Hide all nested replies initially
+            reply.style.display = 'none';
         });
     </script>
 </body>
