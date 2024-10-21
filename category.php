@@ -2,20 +2,20 @@
 include 'connection.php';
 
 
-$category_id = isset($_GET['cat_id']) ? intval($_GET['cat_id']) : 0;
+$cat_id = isset($_GET['cat_id']) ? intval($_GET['cat_id']) : 0;
 
-echo "Category ID: $category_id";
+echo "Category ID: $cat_id";
 
-if ($category_id > 0) {
-    $category_query = "SELECT * FROM categories WHERE cat_id = $category_id";
-    $category_result = $conn->query($category_query);
+if ($cat_id > 0) {
+    $cat_query = "SELECT * FROM categories WHERE cat_id = $cat_id";
+    $cat_result = $conn->query($cat_query);
 
-    if ($category_result && $category_result->num_rows > 0) {
-        $category = $category_result->fetch_assoc();
-        $category_name = $category['cat_name'];
-        $category_description = $category['cat_description'];
+    if ($cat_result && $category_result->num_rows > 0) {
+        $category = $cat_result->fetch_assoc();
+        $cat_name = $category['cat_name'];
+        $cat_description = $category['cat_description'];
 
-        $posts_query = "SELECT * FROM posts WHERE post_cat = $category_id";
+        $posts_query = "SELECT * FROM posts WHERE post_cat = $cat_id";
         $posts_result = $conn->query($posts_query);
     } else {
         echo "Category not found.";
