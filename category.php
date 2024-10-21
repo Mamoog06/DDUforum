@@ -1,6 +1,6 @@
 <?php
 // Include database connection
-include('db_connection.php');
+include'connection.php';
 
 // Get the category_id from the URL
 $category_id = isset($_GET['category_id']) ? intval($_GET['category_id']) : 0;

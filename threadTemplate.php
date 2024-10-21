@@ -1,6 +1,6 @@
 <?php
 // Include database connection
-include('db_connection.php');
+include'connection.php';
 
 // Get the post_id from the URL
 $post_id = isset($_GET['post_id']) ? intval($_GET['post_id']) : 0;
