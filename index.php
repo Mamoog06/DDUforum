@@ -1,18 +1,11 @@
 <?php
 session_start();
-include 'connection.php'; // Ensure this file sets up your $conn variable
+include 'connection.php';
 
-// Connect to the database
-$conn = new mysqli('localhost', 'username', 'password', 'forum_db');
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+$general_categories = $conn->query("SELECT * FROM categories WHERE cat_id BETWEEN 1 AND 7");
+$homebrew_categories = $conn->query("SELECT * FROM categories WHERE cat_id BETWEEN 8 AND 22");
 
-// Fetch categories based on ID ranges
-$general_categories = $conn->query("SELECT * FROM categories WHERE id BETWEEN 1 AND 7");
-$homebrew_categories = $conn->query("SELECT * FROM categories WHERE id BETWEEN 8 AND 22");
 ?>
 
 <!DOCTYPE html>
@@ -52,7 +45,7 @@ $homebrew_categories = $conn->query("SELECT * FROM categories WHERE id BETWEEN 8
                     <?php if ($general_categories->num_rows > 0): ?>
                         <?php while ($category = $general_categories->fetch_assoc()): ?>
                             <div class="category">
-                                <a href="categoryTemplate.php?category_id=<?php echo $category['cat_id']; ?>">
+                                <a href="category.php?category_id=<?php echo $category['cat_id']; ?>">
                                     <?php echo htmlspecialchars($category['cat_name']); ?>
                                 </a>
                             </div>
@@ -72,7 +65,7 @@ $homebrew_categories = $conn->query("SELECT * FROM categories WHERE id BETWEEN 8
                     <?php if ($homebrew_categories->num_rows > 0): ?>
                         <?php while ($category = $homebrew_categories->fetch_assoc()): ?>
                             <div class="category">
-                                <a href="categoryTemplate.php?category_id=<?php echo $category['cat_id']; ?>">
+                                <a href="category.php?category_id=<?php echo $category['cat_id']; ?>">
                                     <?php echo htmlspecialchars($category['cat_name']); ?>
                                 </a>
                             </div>
@@ -112,6 +105,5 @@ $homebrew_categories = $conn->query("SELECT * FROM categories WHERE id BETWEEN 8
 </html>
 
 <?php
-// Close the database connection
 $conn->close();
 ?>
