@@ -33,19 +33,63 @@
                 This is the content of the main post. Here, the user asks how to implement replies in a discussion thread.
             </div>
 
+            <!-- Reply Button for Main Post -->
+            <button class="reply-btn" data-reply-target="reply-form-0">Reply</button>
+
+            <!-- Reply Form for Main Post (hidden initially) -->
+            <div class="reply-form" id="reply-form-0" style="display: none;">
+                <form method="post" action="submit_reply.php">
+                    <textarea name="reply_content" placeholder="Write your reply here..." rows="4" required></textarea>
+                    <input type="hidden" name="thread_id" value="1">
+                    <input type="hidden" name="parent_reply_id" value="0"> <!-- 0 means it's a direct reply to the thread -->
+                    <button type="submit">Post Reply</button>
+                </form>
+            </div>
+
             <!-- First Reply -->
             <div class="reply-box">
                 <div class="reply-meta">Posted by JaneSmith on 2023-10-16</div>
                 <div class="reply-content">
                     This is a reply to the main post. You can display your replies like this.
                 </div>
-                <span class="show-hide-replies" data-target="nested-reply-1">Hide replies</span>
 
-                <!-- Nested Reply -->
-                <div class="nested-reply" id="nested-reply-1">
-                    <div class="reply-meta">Posted by JohnDoe on 2023-10-16</div>
-                    <div class="reply-content">
-                        This is a nested reply to JaneSmith's comment.
+                <!-- Reply Button for JaneSmith's Reply -->
+                <button class="reply-btn" data-reply-target="reply-form-1">Reply</button>
+
+                <!-- Show/Hide Replies Button -->
+                <button class="show-hide-replies" onclick="toggleReplies(this)">Show Replies</button>
+
+                <!-- Container for nested replies -->
+                <div class="nested-replies" style="display: none;">
+                    <!-- Reply Form for JaneSmith's Reply (hidden initially) -->
+                    <div class="reply-form" id="reply-form-1" style="display: none;">
+                        <form method="post" action="submit_reply.php">
+                            <textarea name="reply_content" placeholder="Write your reply here..." rows="4" required></textarea>
+                            <input type="hidden" name="thread_id" value="1">
+                            <input type="hidden" name="parent_reply_id" value="1"> <!-- Reply to JaneSmith's post -->
+                            <button type="submit">Post Reply</button>
+                        </form>
+                    </div>
+
+                    <!-- Nested Reply -->
+                    <div class="nested-reply">
+                        <div class="reply-meta">Posted by JohnDoe on 2023-10-16</div>
+                        <div class="reply-content">
+                            This is a nested reply to JaneSmith's comment.
+                        </div>
+
+                        <!-- Reply Button for Nested Reply -->
+                        <button class="reply-btn" data-reply-target="reply-form-2">Reply</button>
+
+                        <!-- Reply Form for JohnDoe's Nested Reply (hidden initially) -->
+                        <div class="reply-form" id="reply-form-2" style="display: none;">
+                            <form method="post" action="submit_reply.php">
+                                <textarea name="reply_content" placeholder="Write your reply here..." rows="4" required></textarea>
+                                <input type="hidden" name="thread_id" value="1">
+                                <input type="hidden" name="parent_reply_id" value="2"> <!-- Reply to JohnDoe's nested reply -->
+                                <button type="submit">Post Reply</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -56,33 +100,21 @@
                 <div class="reply-content">
                     This is another reply to the main post, discussing how to organize threaded discussions.
                 </div>
-            </div>
 
-            <div class="reply-box">
-                <div class="reply-meta">Posted by DungeonMasterX on 2023-10-17</div>
-                <div class="reply-content">
-                    This is another reply to the main post, discussing how to organize threaded discussions.
-                </div>
-            </div>
+                <!-- Reply Button for DungeonMasterX's Reply -->
+                <button class="reply-btn" data-reply-target="reply-form-3">Reply</button>
 
-            <div class="reply-box">
-                <div class="reply-meta">Posted by DungeonMasterX on 2023-10-17</div>
-                <div class="reply-content">
-                    This is another reply to the main post, discussing how to organize threaded discussions.
-                </div>
-            </div>
+                <!-- Show/Hide Replies Button -->
+                <button class="show-hide-replies" onclick="toggleReplies(this)">Show Replies</button>
 
-            <div class="reply-box">
-                <div class="reply-meta">Posted by DungeonMasterX on 2023-10-17</div>
-                <div class="reply-content">
-                    This is another reply to the main post, discussing how to organize threaded discussions.
-                </div>
-            </div>
-
-            <div class="reply-box">
-                <div class="reply-meta">Posted by DungeonMasterX on 2023-10-17</div>
-                <div class="reply-content">
-                    This is another reply to the main post, discussing how to organize threaded discussions.
+                <!-- Reply Form for DungeonMasterX's Reply (hidden initially) -->
+                <div class="reply-form" id="reply-form-3" style="display: none;">
+                    <form method="post" action="submit_reply.php">
+                        <textarea name="reply_content" placeholder="Write your reply here..." rows="4" required></textarea>
+                        <input type="hidden" name="thread_id" value="1">
+                        <input type="hidden" name="parent_reply_id" value="3"> <!-- Reply to DungeonMasterX's post -->
+                        <button type="submit">Post Reply</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -110,23 +142,30 @@
     </footer>
 
     <script>
-        document.querySelectorAll('.show-hide-replies').forEach(function(toggle) {
-            toggle.addEventListener('click', function() {
-                const targetId = this.getAttribute('data-target');
-                const nestedReply = document.getElementById(targetId);
-                if (nestedReply.style.display === "none") {
-                    nestedReply.style.display = "block";
-                    this.textContent = "Hide replies";
+        document.querySelectorAll('.reply-btn').forEach(function(button) {
+            button.addEventListener('click', function() {
+                const targetId = this.getAttribute('data-reply-target');
+                const replyForm = document.getElementById(targetId);
+                if (replyForm.style.display === 'none') {
+                    replyForm.style.display = 'block';
                 } else {
-                    nestedReply.style.display = "none";
-                    this.textContent = "Show replies";
+                    replyForm.style.display = 'none';
                 }
             });
         });
-        document.querySelectorAll('.nested-reply').forEach(function(reply) {
-            reply.style.display = 'none';
-        });
+
+        function toggleReplies(button) {
+            const nestedReplies = button.nextElementSibling; // Find the nested replies section right after the button
+            if (nestedReplies.style.display === "none" || nestedReplies.style.display === "") {
+                nestedReplies.style.display = "block";
+                button.textContent = "Hide Replies";
+            } else {
+                nestedReplies.style.display = "none";
+                button.textContent = "Show Replies";
+            }
+        }
     </script>
+
 </body>
 
 </html>

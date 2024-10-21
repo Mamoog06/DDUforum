@@ -13,22 +13,19 @@
 	<h1>Forum</h1>
 
 	<div id="wrapper">
-	<div id="menu">
-		<a class="item" href="index.php">Home</a> -
-		<a class="item" href="create_post.php">Create a post</a> -
-		<a class="item" href="create_cat.php">Create a category</a>
-		
-        <div id="userbar">
-		<?php
-        if($_SESSION['signed_in'] == true)
- 	    {
- 	 	    echo 'Hello' . $_SESSION['user_name'] . '. Not you? <a href="signout.php">Sign out</a>';
- 	    }
- 	    else
- 	    {
- 		    echo '<a href="signin.php">Sign in</a> or <a href="signup.php">create an account</a>.';
- 	    }
-		?>
-        </div>
-	</div>
+		<div id="menu">
+			<a class="item" href="index.php">Home</a> -
+			<a class="item" href="create_post.php">Create a post</a> -
+			<a class="item" href="create_cat.php">Create a category</a>
+
+			<div id="userbar">
+				<?php
+				if ($_SESSION['signed_in'] == true) {
+					echo 'Hello' . $_SESSION['user_name'] . '. Not you? <a href="signout.php">Sign out</a>';
+				} else {
+					echo '<a href="signin.php">Sign in</a> or <a href="signup.php">create an account</a>.';
+				}
+				?>
+			</div>
+		</div>
 		<div id="content">
