@@ -1,3 +1,18 @@
+<?php
+// Connect to the database
+$conn = new mysqli('localhost', 'username', 'password', 'forum_db');
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Fetch categories based on ID ranges
+$general_categories = $conn->query("SELECT * FROM categories WHERE id BETWEEN 1 AND 7");
+$homebrew_categories = $conn->query("SELECT * FROM categories WHERE id BETWEEN 8 AND 22");
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,35 +41,45 @@
         </div>
 
         <section class="categories">
+            <!-- General Side Category -->
             <div class="side-categories">
-                <div class="category side-category">DM</div>
+                <div class="category side-category">General</div>
             </div>
             <div class="scrollable-container">
                 <div class="main-categories">
-                    <div class="category">Kategori 1</div>
-                    <div class="category">Kategori 2</div>
-                    <div class="category">Kategori 3</div>
-                    <div class="category">Kategori 4</div>
-                    <div class="category">Kategori 5</div>
-                    <div class="category">Kategori 6</div>
-                    <div class="category">Kategori 7</div>
-                    <div class="category">Kategori 8</div>
-                    <div class="category">Kategori 9</div>
-                    <div class="category">Kategori 10</div>
+                    <?php if ($general_categories->num_rows > 0): ?>
+                        <?php while ($category = $general_categories->fetch_assoc()): ?>
+                            <div class="category">
+                                <a href="categoryTemplate.php?category_id=<?php echo $category['id']; ?>">
+                                    <?php echo htmlspecialchars($category['name']); ?>
+                                </a>
+                            </div>
+                        <?php endwhile; ?>
+                    <?php else: ?>
+                        <p>No categories found.</p>
+                    <?php endif; ?>
                 </div>
             </div>
+
+            <!-- Character Side Category -->
             <div class="side-categories">
-                <div class="category side-category">Homebrew</div>
+                <div class="category side-category">Character</div>
             </div>
             <div class="scrollable-container">
                 <div class="main-categories">
-                    <div class="category">Kategori 11</div>
-                    <div class="category">Kategori 12</div>
-                    <div class="category">Kategori 13</div>
-                    <div class="category">Kategori 14</div>
+                    <?php if ($character_categories->num_rows > 0): ?>
+                        <?php while ($category = $character_categories->fetch_assoc()): ?>
+                            <div class="category">
+                                <a href="categoryTemplate.php?category_id=<?php echo $category['id']; ?>">
+                                    <?php echo htmlspecialchars($category['name']); ?>
+                                </a>
+                            </div>
+                        <?php endwhile; ?>
+                    <?php else: ?>
+                        <p>No categories found.</p>
+                    <?php endif; ?>
                 </div>
             </div>
-        </section>
     </main>
 
     <footer>
@@ -78,7 +103,12 @@
         </div>
     </footer>
 
-    <script src="script.js"></script> <!-- Add this line to link the JavaScript -->
+    <script src="script.js"></script>
 </body>
 
 </html>
+
+<?php
+// Close the database connection
+$conn->close();
+?>
