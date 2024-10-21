@@ -4,6 +4,12 @@
   box-sizing: border-box;
 }
 
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fdfdfd;
+  color: #333;
+}
+
 footer {
   position: fixed;
   bottom: 0;
@@ -12,7 +18,7 @@ footer {
   display: flex;
   justify-content: space-between;
   padding: 20px;
-  background-color: #333;
+  background-color: #233636 ;
   color: #fff;
   font-size: 14px;
 }
@@ -24,7 +30,6 @@ footer {
 }
 
 .footer-social ul {
-  grid-template-columns: 2fr 2fr;
   list-style: none;
   padding-left: 10px;
 }

@@ -4,12 +4,6 @@
   box-sizing: border-box;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  background-color: #fdfdfd;
-  color: #333;
-}
-
 .search-container {
   display: flex;
   justify-content: center;
@@ -21,8 +15,8 @@ body {
   padding: 15px;
   font-size: 20px;
   border-radius: 10px;
-  border: 1px solid #ccc;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #DAA520 ;
+  box-shadow: 0 1px 3px #FFD700 ;
 }
 
 .categories {
@@ -65,7 +59,7 @@ body {
   background-color: #e0e0e0;
   text-align: center;
   font-size: 18px;
-  border: 1px solid #ccc;
+  border: 1px solid #b9b9b9 ;
   transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
@@ -73,7 +67,7 @@ body {
 .scrollable-container .category:hover {
   transform: scale(1.05);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-  border: 1px solid #ccc;
+  border: 1px solid #d8d8d8 ;
 }
 
 
