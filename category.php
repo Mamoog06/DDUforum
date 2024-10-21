@@ -3,17 +3,17 @@
 include'connection.php';
 
 // Get the category_id from the URL
-$category_id = isset($_GET['category_id']) ? intval($_GET['category_id']) : 0;
+$category_id = isset($_GET['cat_id']) ? intval($_GET['cat_id']) : 0;
 
 if ($category_id > 0) {
     // Fetch category information (name, description) from the database
-    $category_query = "SELECT * FROM categories WHERE id = $category_id";
+    $category_query = "SELECT * FROM categories WHERE cat_id = $category_id";
     $category_result = $conn->query($category_query);
 
     if ($category_result->num_rows > 0) {
         $category = $category_result->fetch_assoc();
-        $category_name = $category['name'];
-        $category_description = $category['description'];
+        $category_name = $category['cat_name'];
+        $category_description = $category['cat_description'];
 
         // Fetch posts associated with the category
         $posts_query = "SELECT * FROM posts WHERE post_cat = $category_id";
