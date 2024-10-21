@@ -1,7 +1,6 @@
 <?php
 include 'connection.php';
 
-
 $cat_id = isset($_GET['cat_id']) ? intval($_GET['cat_id']) : 0;
 
 echo "Category ID: $cat_id";
@@ -10,7 +9,7 @@ if ($cat_id > 0) {
     $cat_query = "SELECT * FROM categories WHERE cat_id = $cat_id";
     $cat_result = $conn->query($cat_query);
 
-    if ($cat_result && $category_result->num_rows > 0) {
+    if ($cat_result && $cat_result->num_rows > 0) {
         $category = $cat_result->fetch_assoc();
         $cat_name = $category['cat_name'];
         $cat_description = $category['cat_description'];

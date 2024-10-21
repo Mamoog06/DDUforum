@@ -2,20 +2,22 @@
 session_start();
 include 'connection.php';
 
+// Check for connection error
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+// Query for general categories
 $general_categories = $conn->query("SELECT * FROM categories WHERE cat_id BETWEEN 1 AND 7");
 if (!$general_categories) {
     echo "General categories query failed: " . $conn->error;
 }
 
-$homebrew_categories = $conn->query("SELECT * FROM categories WHERE cat_id BETWEEN 8 AND 22");
-if (!$homebrew_categories) {
-    echo "Homebrew categories query failed: " . $conn->error;
+// Query for player categories
+$player_categories = $conn->query("SELECT * FROM categories WHERE cat_id BETWEEN 8 AND 22");
+if (!$player_categories) {
+    echo "Player categories query failed: " . $conn->error; // Changed message for clarity
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -55,7 +57,7 @@ if (!$homebrew_categories) {
                     <?php if ($general_categories->num_rows > 0): ?>
                         <?php while ($category = $general_categories->fetch_assoc()): ?>
                             <div class="category">
-                                <a href="category.php?category_id=<?php echo $category['cat_id']; ?>">
+                                <a href="category.php?cat_id=<?php echo $category['cat_id']; ?>"> <!-- Corrected parameter name -->
                                     <?php echo htmlspecialchars($category['cat_name']); ?>
                                 </a>
                             </div>
@@ -66,16 +68,16 @@ if (!$homebrew_categories) {
                 </div>
             </div>
 
-            <!-- Homebrew Side Category -->
+            <!-- Player Side Category -->
             <div class="side-categories">
-                <div class="category side-category">Homebrew</div>
+                <div class="category side-category">Character</div>
             </div>
             <div class="scrollable-container">
                 <div class="main-categories">
-                    <?php if ($homebrew_categories->num_rows > 0): ?>
-                        <?php while ($category = $homebrew_categories->fetch_assoc()): ?>
+                    <?php if ($player_categories->num_rows > 0): ?>
+                        <?php while ($category = $player_categories->fetch_assoc()): ?>
                             <div class="category">
-                                <a href="category.php?category_id=<?php echo $category['cat_id']; ?>">
+                                <a href="category.php?cat_id=<?php echo $category['cat_id']; ?>"> 
                                     <?php echo htmlspecialchars($category['cat_name']); ?>
                                 </a>
                             </div>
