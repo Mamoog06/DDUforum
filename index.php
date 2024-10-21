@@ -2,9 +2,19 @@
 session_start();
 include 'connection.php';
 
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
 $general_categories = $conn->query("SELECT * FROM categories WHERE cat_id BETWEEN 1 AND 7");
+if (!$general_categories) {
+    echo "General categories query failed: " . $conn->error;
+}
+
 $homebrew_categories = $conn->query("SELECT * FROM categories WHERE cat_id BETWEEN 8 AND 22");
+if (!$homebrew_categories) {
+    echo "Homebrew categories query failed: " . $conn->error;
+}
 
 ?>
 
@@ -105,5 +115,6 @@ $homebrew_categories = $conn->query("SELECT * FROM categories WHERE cat_id BETWE
 </html>
 
 <?php
+// Close the database connection
 $conn->close();
 ?>
