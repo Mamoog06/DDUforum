@@ -1,21 +1,20 @@
 <?php
-// Include database connection (if required)
-include('db_connection.php');
 
-// Get the category_id from the URL
+include('connection.php');
+
+
 $category_id = isset($_GET['category_id']) ? intval($_GET['category_id']) : 0;
 
 if ($category_id > 0) {
-    // Fetch category information (name, description) from the database
-    $category_query = "SELECT * FROM categories WHERE id = $category_id";
+    
+    $category_query = "SELECT * FROM categories WHERE cat_id = $category_id";
     $category_result = $conn->query($category_query);
 
-    if ($category_result->num_rows > 0) {
+    if ($category_result && $category_result->num_rows > 0) {
         $category = $category_result->fetch_assoc();
-        $category_name = $category['name'];
-        $category_description = $category['description'];
+        $category_name = $category['cat_name'];
+        $category_description = $category['description']; 
 
-        // Fetch posts/topics associated with the category
         $posts_query = "SELECT * FROM posts WHERE category_id = $category_id";
         $posts_result = $conn->query($posts_query);
     } else {
@@ -43,7 +42,7 @@ if ($category_id > 0) {
 <body>
     <header>
         <div class="logo">
-            <a href="home.php" style="text-decoration: none; color: inherit">Logo</a>
+            <a href="index.php" style="text-decoration: none; color: inherit">Logo</a>
         </div>
         <div class="search-container">
             <input type="text" placeholder="Search...">
@@ -63,7 +62,7 @@ if ($category_id > 0) {
             <p class="category-description"><?php echo htmlspecialchars($category_description); ?></p>
 
             <div class="topic-list">
-                <?php if ($posts_result->num_rows > 0): ?>
+                <?php if ($posts_result && $posts_result->num_rows > 0): ?>
                     <?php while ($post = $posts_result->fetch_assoc()): ?>
                         <div class="topic-box">
                             <div class="topic-meta">
@@ -111,3 +110,8 @@ if ($category_id > 0) {
 </body>
 
 </html>
+
+<?php
+// Close the database connection
+$conn->close();
+?>
