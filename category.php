@@ -1,21 +1,22 @@
 <?php
+// Include database connection
+include('db_connection.php');
 
-include('connection.php');
-
-
+// Get the category_id from the URL
 $category_id = isset($_GET['category_id']) ? intval($_GET['category_id']) : 0;
 
 if ($category_id > 0) {
-    
-    $category_query = "SELECT * FROM categories WHERE cat_id = $category_id";
+    // Fetch category information (name, description) from the database
+    $category_query = "SELECT * FROM categories WHERE id = $category_id";
     $category_result = $conn->query($category_query);
 
-    if ($category_result && $category_result->num_rows > 0) {
+    if ($category_result->num_rows > 0) {
         $category = $category_result->fetch_assoc();
-        $category_name = $category['cat_name'];
-        $category_description = $category['description']; 
+        $category_name = $category['name'];
+        $category_description = $category['description'];
 
-        $posts_query = "SELECT * FROM posts WHERE category_id = $category_id";
+        // Fetch posts associated with the category
+        $posts_query = "SELECT * FROM posts WHERE post_cat = $category_id";
         $posts_result = $conn->query($posts_query);
     } else {
         echo "Category not found.";
@@ -42,7 +43,7 @@ if ($category_id > 0) {
 <body>
     <header>
         <div class="logo">
-            <a href="index.php" style="text-decoration: none; color: inherit">Logo</a>
+            <a href="home.php" style="text-decoration: none; color: inherit">Logo</a>
         </div>
         <div class="search-container">
             <input type="text" placeholder="Search...">
@@ -54,30 +55,20 @@ if ($category_id > 0) {
 
     <main>
         <div class="category-page">
-            <div class="category-header">
-                <h1><?php echo htmlspecialchars($category_name); ?></h1>
-                <a href="new_post.php?category_id=<?php echo $category_id; ?>" class="new-post-btn">New Post</a>
-            </div>
-            <hr class="category-line">
-            <p class="category-description"><?php echo htmlspecialchars($category_description); ?></p>
+            <h1><?php echo htmlspecialchars($category_name); ?></h1>
+            <p><?php echo htmlspecialchars($category_description); ?></p>
 
-            <div class="topic-list">
-                <?php if ($posts_result && $posts_result->num_rows > 0): ?>
+            <div class="posts-list">
+                <?php if ($posts_result->num_rows > 0): ?>
                     <?php while ($post = $posts_result->fetch_assoc()): ?>
-                        <div class="topic-box">
-                            <div class="topic-meta">
-                                <div class="topic-title">
-                                    <a href="topic.php?id=<?php echo $post['id']; ?>">
-                                        <?php echo htmlspecialchars($post['title']); ?>
-                                    </a>
-                                </div>
-                                <span>by <?php echo htmlspecialchars($post['author']); ?></span>
-                                <span class="post-date">Posted on: <?php echo $post['created_at']; ?></span>
-                            </div>
-                            <div class="replies-views">
-                                <span><?php echo $post['replies_count']; ?> Replies</span>
-                                <span><?php echo $post['views_count']; ?> Views</span>
-                            </div>
+                        <div class="post-item">
+                            <h2>
+                                <a href="threadtemplate.php?post_id=<?php echo $post['post_id']; ?>">
+                                    <?php echo htmlspecialchars($post['post_caption']); ?>
+                                </a>
+                            </h2>
+                            <p><?php echo htmlspecialchars($post['post_content']); ?></p>
+                            <span>Posted by <?php echo htmlspecialchars($post['post_by']); ?> on <?php echo $post['post_date']; ?></span>
                         </div>
                     <?php endwhile; ?>
                 <?php else: ?>
