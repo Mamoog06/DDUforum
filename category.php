@@ -1,14 +1,12 @@
 <?php
 include 'connection.php';
 
-// Get the category_id from the URL
+
 $category_id = isset($_GET['cat_id']) ? intval($_GET['cat_id']) : 0;
 
-// Debugging line to check the category ID
-echo "Category ID: $category_id"; // This will show what ID is being received
+echo "Category ID: $category_id";
 
 if ($category_id > 0) {
-    // Fetch category information (name, description) from the database
     $category_query = "SELECT * FROM categories WHERE cat_id = $category_id";
     $category_result = $conn->query($category_query);
 
@@ -17,7 +15,6 @@ if ($category_id > 0) {
         $category_name = $category['cat_name'];
         $category_description = $category['cat_description'];
 
-        // Fetch posts associated with the category
         $posts_query = "SELECT * FROM posts WHERE post_cat = $category_id";
         $posts_result = $conn->query($posts_query);
     } else {
@@ -36,7 +33,7 @@ if ($category_id > 0) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo htmlspecialchars($category_name); ?></title>
+    <title><?php echo htmlspecialchars($cat_name); ?></title>
     <link rel="stylesheet" href="header.css">
     <link rel="stylesheet" href="footer.css">
     <link rel="stylesheet" href="categoryTemplate.css">
@@ -57,8 +54,8 @@ if ($category_id > 0) {
 
     <main>
         <div class="category-page">
-            <h1><?php echo htmlspecialchars($category_name); ?></h1>
-            <p><?php echo htmlspecialchars($category_description); ?></p>
+            <h1><?php echo htmlspecialchars($cat_name); ?></h1>
+            <p><?php echo htmlspecialchars($cat_description); ?></p>
 
             <div class="posts-list">
                 <?php if ($posts_result && $posts_result->num_rows > 0): ?>
