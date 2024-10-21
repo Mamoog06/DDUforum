@@ -2,70 +2,75 @@
 include 'connection.php';
 include 'header.php';
 $sql = "SELECT 
-cat_id, 
-cat_name, 
-cat_description 
+post_id, 
+post_caption,
+post_content,
+post_by
 FROM 
-categories 
+posts 
 WHERE 
-cat_id = " . mysqli_real_escape_string($conn, $_GET['id']);
+post_id = " . mysqli_real_escape_string($conn, $_GET['id']);
 $result = mysqli_query($conn, $sql);
 if(!$result)
 {
-    echo 'The category could not be displayed, please try again later.' . mysqli_error($conn);
+    echo 'The post could not be displayed, please try again later.' . mysqli_error($conn);
 }
 else
 {
     if(mysqli_num_rows($result) == 0)
     {
-        echo 'This category does not exist.';
+        echo 'This post does not exist.';
     }
     else
     {
         while($row = mysqli_fetch_assoc($result))
         {
-            echo '<h2>Posts in ′' . $row['cat_name'] . '′ category</h2>';
+            echo '<h2>Comments in ′' . $row['post_caption'] . '′ post</h2>';
         }
         $sql = "SELECT 
-        post_id, 
-        post_caption,
-        post_content,
-        post_date, 
-        post_cat 
+        com_id, 
+        com_content,
+        com_date, 
+        com_post,
+        com_by
         FROM 
-        posts 
+        comments 
         WHERE 
-        post_cat = " . mysqli_real_escape_string($conn, $_GET['id']);
+        com_post = " . mysqli_real_escape_string($conn, $_GET['id']);
         $result = mysqli_query($conn, $sql);
         if(!$result)
         {
-            echo 'The posts could not be displayed, please try again later.';
+            echo 'The comments could not be displayed, please try again later.';
         }
         else
         {
             if(mysqli_num_rows($result) == 0)
             {
-                echo 'There are no posts in this category yet.';
+                echo 'There are no comments on this post yet.';
             }
             else
             {
                 echo '<table border="2"> 
                 <tr> 
-                <th>Posts</th> 
+                <th>Comments</th> 
                 <th>Created at</th> 
                 </tr>';    
                 while($row = mysqli_fetch_assoc($result))
                 {                
                     echo '<tr>';
                         echo '<td class="leftpart">';
-                            echo '<h3><a href="post.php?id=' . $row['post_id'] . '">' . $row['post_caption'] . '</a></h3>';
+                            echo '<h5>' . $row['com_id'] . '">' . $row['com_content'] . '</h5>';
                         echo '</td>';
                         echo '<td class="rightpart">';
-                            echo date('d-m-Y', strtotime($row['post_date']));
+                            echo date('d-m-Y', strtotime($row['com_date']));
                         echo '</td>';
                     echo '</tr>';
                 }
                 echo '</table>';
+            }
+            if($_SESSION['signed_in'] == true)
+            {
+                echo '<a href="comment.php">comment on this post</a>';
             }
         }
     }
