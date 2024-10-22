@@ -33,7 +33,7 @@ if ($cat_id > 0) {
     <title><?php echo htmlspecialchars($cat_name); ?></title>
     <link rel="stylesheet" href="header.css">
     <link rel="stylesheet" href="footer.css">
-    <link rel="stylesheet" href="post.css">
+    <link rel="stylesheet" href="categoryTemplate.css">
 </head>
 
 <body>
