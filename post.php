@@ -1,6 +1,6 @@
 <?php
 
-include'connection.php';
+include 'connection.php';
 
 $post_id = isset($_GET['post_id']) ? intval($_GET['post_id']) : 0;
 
@@ -15,7 +15,8 @@ if ($post_id > 0) {
         $post_by = $post['post_by'];
         $post_date = $post['post_date'];
 
-        $comments_query = "SELECT * FROM comments WHERE post_id = $post_id ORDER BY com_date ASC";
+        $comments_query = "SELECT * FROM comments WHERE com_post = $post_id ORDER BY com_date ASC";
+
         $comments_result = $conn->query($comments_query);
     } else {
         echo "Post not found.";
@@ -35,6 +36,7 @@ if ($post_id > 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($post_caption); ?></title>
     <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="footer.css">
     <link rel="stylesheet" href="post.css">
 </head>
 
@@ -66,6 +68,7 @@ if ($post_id > 0) {
                 <form method="post" action="submit_reply.php">
                     <textarea name="reply_content" placeholder="Write your reply here..." rows="4" required></textarea>
                     <input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
+                    <input type="hidden" name="com_by" value="<?php echo htmlspecialchars($post_by); ?>">
                     <button type="submit">Post Reply</button>
                 </form>
             </div>
@@ -74,9 +77,9 @@ if ($post_id > 0) {
                 <?php if ($comments_result->num_rows > 0): ?>
                     <?php while ($comment = $comments_result->fetch_assoc()): ?>
                         <div class="reply-box">
-                            <?php echo "Comment by: " . htmlspecialchars($comment['com_by']); ?>
+                            <?php echo "Comment by: " . htmlspecialchars($comment['user_name']); ?> <!-- Display the username -->
                             <div class="reply-meta">
-                                Posted by <?php echo htmlspecialchars($comment['com_by']); ?> on <?php echo $comment['com_date']; ?>
+                                <?php echo $comment['com_date']; ?>
                             </div>
                             <div class="reply-content">
                                 <?php echo htmlspecialchars($comment['com_content']); ?>
@@ -87,10 +90,30 @@ if ($post_id > 0) {
                     <p>No comments yet. Be the first to comment!</p>
                 <?php endif; ?>
             </div>
+
         </div>
     </main>
 
-    <?php include 'footer.php'; ?>
+    <footer>
+        <div class="footer-info">
+            <p>Firmanavn: Marquuefy</p>
+            <p>Nummer: 19874198</p>
+            <p>Email: Marqueefy@dnd.dk</p>
+        </div>
+        <div class="footer-social">
+            <p>Sociale Medier:</p>
+            <ul>
+                <li>Instagram</li>
+                <li>Twitter</li>
+                <li>TikTok</li>
+                <li>Facebook</li>
+            </ul>
+        </div>
+        <div class="footer-about">
+            <p>Om os:</p>
+            <p>Information about the company.</p>
+        </div>
+    </footer>
 
     <script>
         document.querySelectorAll('.reply-btn').forEach(function(button) {
