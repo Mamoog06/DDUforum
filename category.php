@@ -59,7 +59,11 @@ if ($cat_id > 0) {
         <div class="category-page">
             <div class="category-header">
                 <h1><?php echo htmlspecialchars($cat_name); ?></h1>
+<<<<<<< Updated upstream
                 <a href="createPost.php?cat_id=<?php echo $cat_id; ?>" class="new-post-btn">New Post</a>
+=======
+                <a href="createPost.php" class="new-post-btn">New Post</a>
+>>>>>>> Stashed changes
             </div>
 
             <p class="category-description"><?php echo htmlspecialchars($cat_description); ?></p>

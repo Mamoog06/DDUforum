@@ -15,9 +15,13 @@ if ($post_id > 0) {
         $post_by = $post['post_by'];
         $post_date = $post['post_date'];
 
+<<<<<<< Updated upstream
         $comments_query = "SELECT comments.*, users.user_name FROM comments JOIN users ON comments.com_by = users.user_id WHERE com_post = $post_id ORDER BY com_date ASC";
         $comments_result = $conn->query($comments_query);
 
+=======
+        $comments_query = "SELECT * FROM comments WHERE com_post = $post_id ORDER BY com_date ASC";
+>>>>>>> Stashed changes
         $comments_result = $conn->query($comments_query);
     } else {
         echo "Post not found.";
@@ -85,8 +89,12 @@ if ($post_id > 0) {
                 <?php if ($comments_result->num_rows > 0): ?>
                     <?php while ($comment = $comments_result->fetch_assoc()): ?>
                         <div class="reply-box">
+<<<<<<< Updated upstream
                             <!-- Display the username from the users table -->
                             <?php echo htmlspecialchars($comment['user_name']); ?>
+=======
+                            <?php echo "Comment by: " . htmlspecialchars($comment['user_name']); ?>
+>>>>>>> Stashed changes
                             <div class="reply-meta">
                                 <!-- Display the comment date -->
                                 <?php echo htmlspecialchars($comment['com_date']); ?>
