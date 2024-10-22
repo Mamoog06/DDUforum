@@ -15,8 +15,8 @@
   padding: 15px;
   font-size: 20px;
   border-radius: 10px;
-  border: 1px solid #DAA520 ;
-  box-shadow: 0 1px 3px #FFD700 ;
+  border: 1px solid #daa520;
+  box-shadow: 0 1px 3px #ffd700;
 }
 
 .categories {
@@ -31,7 +31,6 @@
   display: grid;
 }
 
-
 .scrollable-container {
   overflow-x: auto;
   overflow-y: hidden;
@@ -41,51 +40,48 @@
 }
 
 .scrollable-container::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 .scrollable-container {
-    scrollbar-width: none;
+  scrollbar-width: none;
 }
 
 .main-categories {
   display: flex;
 }
 
-
 .category {
   flex: 0 0 225px;
   padding: 20px;
-  background-color: #e0e0e0;
+  background-color: #f9f9f9;
   text-align: center;
   font-size: 18px;
-  border: 1px solid #b9b9b9 ;
+  border: 1px solid #e5e5e5;
   transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
-
 
 .scrollable-container .category:hover {
   transform: scale(1.05);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-  border: 1px solid #d8d8d8 ;
+  border: 1px solid #e5e5e5;
 }
 
-
 .side-category {
- flex: 0 0 225px;
+  flex: 0 0 225px;
   padding: 20px;
-  background-color: #e0e0e0;
+  background-color: #f9f9f9;
   text-align: center;
-  font-size: 18px; 
-  border: 1px solid #ccc; 
+  font-size: 18px;
+  border: 1px solid #e5e5e5;
 }
 
 .side-category:hover {
-  transform: none; 
+  transform: none;
   box-shadow: none;
-  border: 1px solid #ccc;
+  border: 1px solid #e5e5e5;
 }
 
 .scrollable-container.active {
-    cursor: grabbing;
+  cursor: grabbing;
 }

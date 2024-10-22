@@ -16,6 +16,11 @@
         <div class="search-container">
             <input type="text" placeholder="Search...">
         </div>
+        <div class="actions">
+            <div class="rules">
+                <a href="rules.php" style="text-decoration: none; color: inherit">Rules</a>
+            </div>
+        </div>
     </header>
 
     <main>

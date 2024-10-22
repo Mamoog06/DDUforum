@@ -1,3 +1,8 @@
+<?php
+session_start();
+include 'connection.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +10,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Sign Up</title>
-	<link rel="stylesheet" href="signup.css"> <!-- Link to the new CSS file -->
+	<link rel="stylesheet" href="signup.css">
 </head>
 
 <body>
@@ -17,7 +22,6 @@
 		echo '<h3>Sign Up</h3>';
 
 		if ($_SERVER['REQUEST_METHOD'] != 'POST') {
-			// Form not submitted yet, show the signup form
 			echo '<form method="post" action="">
                 <input type="text" name="user_name" placeholder="Username" required />
                 <input type="password" name="user_pass" placeholder="Password" required />
@@ -26,7 +30,7 @@
                 <input type="submit" value="Sign up" />
               </form>';
 		} else {
-			$errors = array(); // Array to hold errors
+			$errors = array();
 
 			// Check for username
 			if (isset($_POST['user_name'])) {

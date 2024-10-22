@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'connection.php';
 
 $cat_id = isset($_GET['cat_id']) ? intval($_GET['cat_id']) : 0;
@@ -12,7 +13,7 @@ if ($cat_id > 0) {
         $cat_name = $category['cat_name'];
         $cat_description = $category['cat_description'];
 
-        $posts_query = "SELECT * FROM posts WHERE post_cat = $cat_id";
+        $posts_query = "SELECT posts.*, users.user_name FROM posts JOIN users ON posts.post_by = users.user_id WHERE post_cat = $cat_id";
         $posts_result = $conn->query($posts_query);
     } else {
         echo "Category not found.";
@@ -32,6 +33,7 @@ if ($cat_id > 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($cat_name); ?></title>
     <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="footer.css">
     <link rel="stylesheet" href="categoryTemplate.css">
 </head>
 
@@ -43,8 +45,13 @@ if ($cat_id > 0) {
         <div class="search-container">
             <input type="text" placeholder="Search...">
         </div>
-        <div class="profile">
-            <a href="profile.php" style="text-decoration: none; color: inherit">Profile</a>
+        <div class="actions">
+            <div class="rules">
+                <a href="rules.php" style="text-decoration: none; color: inherit">Rules</a>
+            </div>
+            <div class="profile">
+                <a href="profile.php" style="text-decoration: none; color: inherit">Profile</a>
+            </div>
         </div>
     </header>
 
@@ -52,8 +59,7 @@ if ($cat_id > 0) {
         <div class="category-page">
             <div class="category-header">
                 <h1><?php echo htmlspecialchars($cat_name); ?></h1>
-                <!-- Example button (if you want to add a "new post" button) -->
-                <a href="createPost.php" class="new-post-btn">New Post</a>
+                <a href="createPost.php?cat_id=<?php echo $cat_id; ?>" class="new-post-btn">New Post</a>
             </div>
 
             <p class="category-description"><?php echo htmlspecialchars($cat_description); ?></p>
@@ -70,7 +76,8 @@ if ($cat_id > 0) {
                                         <?php echo htmlspecialchars($post['post_caption']); ?>
                                     </a>
                                 </h2>
-                                <span>Posted by <?php echo htmlspecialchars($post['post_by']); ?> on <?php echo $post['post_date']; ?></span>
+                                <!-- Display the username here -->
+                                <span>Posted by <?php echo htmlspecialchars($post['user_name']); ?> on <?php echo $post['post_date']; ?></span>
                             </div>
                             <div class="replies-views">
                                 <!-- You can add post stats like replies and views here -->
@@ -83,11 +90,15 @@ if ($cat_id > 0) {
                     <p>No posts found in this category.</p>
                 <?php endif; ?>
             </div>
+
         </div>
 
     </main>
 
-    <?php include 'footer.php'; ?>
+    <?php
+    include('footer.php');
+    ?>
+
 </body>
 
 </html>
