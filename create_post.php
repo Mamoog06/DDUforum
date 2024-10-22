@@ -2,7 +2,7 @@
 	include 'connection.php';
 	include 'header.php';
 	echo '<h2>Create a post</h2>';
-	if ($_SESSION['signed_in'] == true) {
+	if ($_SESSION['signed_in'] == false) {
 		echo 'Sorry, you have to be <a href="/forum/signin.php">signed in</a> to create a post.';
 	} else {
 		if ($_SERVER['REQUEST_METHOD'] != 'POST') {
