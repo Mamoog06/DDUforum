@@ -3,8 +3,6 @@ include 'connection.php';
 
 $cat_id = isset($_GET['cat_id']) ? intval($_GET['cat_id']) : 0;
 
-echo "Category ID: $cat_id";
-
 if ($cat_id > 0) {
     $cat_query = "SELECT * FROM categories WHERE cat_id = $cat_id";
     $cat_result = $conn->query($cat_query);
@@ -65,7 +63,6 @@ if ($cat_id > 0) {
                                     <?php echo htmlspecialchars($post['post_caption']); ?>
                                 </a>
                             </h2>
-                            <p><?php echo htmlspecialchars($post['post_content']); ?></p>
                             <span>Posted by <?php echo htmlspecialchars($post['post_by']); ?> on <?php echo $post['post_date']; ?></span>
                         </div>
                     <?php endwhile; ?>
