@@ -15,7 +15,7 @@ if ($post_id > 0) {
         $post_by = $post['post_by'];
         $post_date = $post['post_date'];
 
-        $comments_query = "SELECT * FROM comments WHERE post_id = $post_id ORDER BY com_date ASC";
+        $comments_query = "SELECT * FROM comments WHERE com_post = $post_id ORDER BY com_date ASC";
         $comments_result = $conn->query($comments_query);
     } else {
         echo "Post not found.";
