@@ -7,7 +7,7 @@
     <title>New Post</title>
     <link rel="stylesheet" href="header.css">
     <link rel="stylesheet" href="footer.css">
-    <link rel="stylesheet" href="postTemplate.css">
+    <link rel="stylesheet" href="createPost.css">
 </head>
 
 <body>

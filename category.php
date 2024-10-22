@@ -33,7 +33,7 @@ if ($cat_id > 0) {
     <title><?php echo htmlspecialchars($cat_name); ?></title>
     <link rel="stylesheet" href="header.css">
     <link rel="stylesheet" href="footer.css">
-    <link rel="stylesheet" href="categoryTemplate.css">
+    <link rel="stylesheet" href="post.css">
 </head>
 
 <body>
@@ -51,19 +51,33 @@ if ($cat_id > 0) {
 
     <main>
         <div class="category-page">
-            <h1><?php echo htmlspecialchars($cat_name); ?></h1>
-            <p><?php echo htmlspecialchars($cat_description); ?></p>
+            <div class="category-header">
+                <h1><?php echo htmlspecialchars($cat_name); ?></h1>
+                <!-- Example button (if you want to add a "new post" button) -->
+                <a href="newpost.php" class="new-post-btn">New Post</a>
+            </div>
 
-            <div class="posts-list">
+            <p class="category-description"><?php echo htmlspecialchars($cat_description); ?></p>
+
+            <hr class="category-line">
+
+            <div class="topic-list">
                 <?php if ($posts_result && $posts_result->num_rows > 0): ?>
                     <?php while ($post = $posts_result->fetch_assoc()): ?>
-                        <div class="post-item">
-                            <h2>
-                                <a href="threadtemplate.php?post_id=<?php echo $post['post_id']; ?>">
-                                    <?php echo htmlspecialchars($post['post_caption']); ?>
-                                </a>
-                            </h2>
-                            <span>Posted by <?php echo htmlspecialchars($post['post_by']); ?> on <?php echo $post['post_date']; ?></span>
+                        <div class="topic-box">
+                            <div class="topic-meta">
+                                <h2 class="topic-title">
+                                    <a href="threadtemplate.php?post_id=<?php echo $post['post_id']; ?>">
+                                        <?php echo htmlspecialchars($post['post_caption']); ?>
+                                    </a>
+                                </h2>
+                                <span>Posted by <?php echo htmlspecialchars($post['post_by']); ?> on <?php echo $post['post_date']; ?></span>
+                            </div>
+                            <div class="replies-views">
+                                <!-- You can add post stats like replies and views here -->
+                                <span>Replies: 0</span>
+                                <span>Views: 0</span>
+                            </div>
                         </div>
                     <?php endwhile; ?>
                 <?php else: ?>
@@ -71,6 +85,7 @@ if ($cat_id > 0) {
                 <?php endif; ?>
             </div>
         </div>
+
     </main>
 
     <footer>
