@@ -39,7 +39,7 @@ if ($cat_id > 0) {
 <body>
     <header>
         <div class="logo">
-            <a href="home.php" style="text-decoration: none; color: inherit">Logo</a>
+            <a href="index.php" style="text-decoration: none; color: inherit">Logo</a>
         </div>
         <div class="search-container">
             <input type="text" placeholder="Search...">

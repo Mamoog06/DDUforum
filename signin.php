@@ -14,7 +14,7 @@
 		echo '<h3>Sign In</h3>';
 		include 'connection.php';
 
-		if (isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
+		if ($_SESSION['signed_in'] == true) {
 			echo '<p class="already-signed-in">You are already signed in.</p>';
 		} else {
 			if ($_SERVER['REQUEST_METHOD'] != 'POST') {
