@@ -1,11 +1,11 @@
 <?php
-
+session_start();
 include 'connection.php';
 
 $post_id = isset($_GET['post_id']) ? intval($_GET['post_id']) : 0;
 
 if ($post_id > 0) {
-    $post_query = "SELECT * FROM posts WHERE post_id = $post_id";
+    $post_query = "SELECT posts.*, users.user_name FROM posts JOIN users ON posts.post_by = users.user_id WHERE post_id = $post_id";
     $post_result = $conn->query($post_query);
 
     if ($post_result->num_rows > 0) {
@@ -15,7 +15,8 @@ if ($post_id > 0) {
         $post_by = $post['post_by'];
         $post_date = $post['post_date'];
 
-        $comments_query = "SELECT * FROM comments WHERE com_post = $post_id ORDER BY com_date ASC";
+        $comments_query = "SELECT comments.*, users.user_name FROM comments JOIN users ON comments.com_by = users.user_id WHERE com_post = $post_id ORDER BY com_date ASC";
+        $comments_result = $conn->query($comments_query);
 
         $comments_result = $conn->query($comments_query);
     } else {
@@ -36,7 +37,6 @@ if ($post_id > 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($post_caption); ?></title>
     <link rel="stylesheet" href="header.css">
-    <link rel="stylesheet" href="footer.css">
     <link rel="stylesheet" href="post.css">
 </head>
 
@@ -48,8 +48,13 @@ if ($post_id > 0) {
         <div class="search-container">
             <input type="text" placeholder="Search...">
         </div>
-        <div class="profile">
-            <a href="profile.php" style="text-decoration: none; color: inherit">Profile</a>
+        <div class="actions">
+            <div class="rules">
+                <a href="rules.php" style="text-decoration: none; color: inherit">Rules</a>
+            </div>
+            <div class="profile">
+                <a href="profile.php" style="text-decoration: none; color: inherit">Profile</a>
+            </div>
         </div>
     </header>
 
@@ -57,7 +62,10 @@ if ($post_id > 0) {
         <div class="thread-page">
             <!-- Main Thread Content -->
             <div class="thread-title"><?php echo htmlspecialchars($post_caption); ?></div>
-            <div class="thread-meta">Posted by <?php echo htmlspecialchars($post_by); ?> on <?php echo $post_date; ?></div>
+            <div class="thread-meta">
+                Posted by <?php echo htmlspecialchars($post['user_name']); ?> on <?php echo htmlspecialchars($post_date); ?>
+            </div>
+
             <div class="thread-content"><?php echo htmlspecialchars($post_content); ?></div>
 
             <!-- Reply Button for Main Post -->
@@ -77,11 +85,14 @@ if ($post_id > 0) {
                 <?php if ($comments_result->num_rows > 0): ?>
                     <?php while ($comment = $comments_result->fetch_assoc()): ?>
                         <div class="reply-box">
-                            <?php echo "Comment by: " . htmlspecialchars($comment['user_name']); ?> <!-- Display the username -->
+                            <!-- Display the username from the users table -->
+                            <?php echo htmlspecialchars($comment['user_name']); ?>
                             <div class="reply-meta">
-                                <?php echo $comment['com_date']; ?>
+                                <!-- Display the comment date -->
+                                <?php echo htmlspecialchars($comment['com_date']); ?>
                             </div>
                             <div class="reply-content">
+                                <!-- Display the comment content -->
                                 <?php echo htmlspecialchars($comment['com_content']); ?>
                             </div>
                         </div>
@@ -91,29 +102,13 @@ if ($post_id > 0) {
                 <?php endif; ?>
             </div>
 
+
         </div>
     </main>
 
-    <footer>
-        <div class="footer-info">
-            <p>Firmanavn: Marquuefy</p>
-            <p>Nummer: 19874198</p>
-            <p>Email: Marqueefy@dnd.dk</p>
-        </div>
-        <div class="footer-social">
-            <p>Sociale Medier:</p>
-            <ul>
-                <li>Instagram</li>
-                <li>Twitter</li>
-                <li>TikTok</li>
-                <li>Facebook</li>
-            </ul>
-        </div>
-        <div class="footer-about">
-            <p>Om os:</p>
-            <p>Information about the company.</p>
-        </div>
-    </footer>
+    <?php
+    include('footer.php')
+    ?>
 
     <script>
         document.querySelectorAll('.reply-btn').forEach(function(button) {

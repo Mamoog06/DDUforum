@@ -1,15 +1,9 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 10px;
-  background-color: #8B0000 ;
+  background-color: #8b0000;
   color: #f2f2f2;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
@@ -20,12 +14,20 @@ header .logo {
   margin-right: 100px;
 }
 
-header .profile {
-  font-size: 16px;
+header .actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
-header .profile a:visited {
-  color: inherit;
+header .actions .rules,
+header .actions .profile {
+  font-size: 16px;
+  margin-left: 30px;
+}
+
+header .actions a {
+  white-space: nowrap;
 }
 
 header .search-container {
@@ -34,11 +36,11 @@ header .search-container {
   margin-right: auto;
 }
 
-header .search-container input[type="text"]{
+header .search-container input[type="text"] {
   width: 100%;
   font-size: 20px;
   border: none;
-  background-color: #8B0000 ;
+  background-color: #8b0000;
   outline: none;
   border-radius: 0;
   box-shadow: none;

@@ -1,4 +1,5 @@
 	<?php
+	session_start();
 	include 'connection.php';
 	include 'header.php';
 	echo '<h2>Create a post</h2>';

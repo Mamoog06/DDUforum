@@ -36,8 +36,13 @@ if (!$player_categories) {
         <div class="logo">
             <a href="index.php" style="text-decoration: none; color: inherit">Logo</a>
         </div>
-        <div class="profile">
-            <a href="profile.php" style="text-decoration: none; color: inherit">Profile</a>
+        <div class="actions">
+            <div class="rules">
+                <a href="rules.php" style="text-decoration: none; color: inherit">Rules</a>
+            </div>
+            <div class="profile">
+                <a href="profile.php" style="text-decoration: none; color: inherit">Profile</a>
+            </div>
         </div>
     </header>
 
@@ -76,7 +81,7 @@ if (!$player_categories) {
                     <?php if ($player_categories->num_rows > 0): ?>
                         <?php while ($category = $player_categories->fetch_assoc()): ?>
                             <div class="category">
-                                <a href="category.php?cat_id=<?php echo $category['cat_id']; ?>"> 
+                                <a href="category.php?cat_id=<?php echo $category['cat_id']; ?>">
                                     <?php echo htmlspecialchars($category['cat_name']); ?>
                                 </a>
                             </div>
@@ -89,7 +94,7 @@ if (!$player_categories) {
         </section>
     </main>
 
-<?php include 'footer.php'; ?>
+    <?php include 'footer.php'; ?>
 
     <script src="script.js"></script>
 </body>

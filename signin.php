@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿<?php
+session_start();
+include 'connection.php';
+
+?>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -61,7 +66,7 @@
 								$_SESSION['user_name']  = $row['user_name'];
 								$_SESSION['user_level'] = $row['user_level'];
 							}
-							echo '<p class="success-message">Welcome, ' . $_SESSION['user_name'] . '. 
+							echo '<p class="success-message">Welcome, ' . $_SESSION['user_name'] . '.
                         <a href="index.php" class="proceed-link">Proceed to the forum overview</a>.</p>';
 						}
 					}
