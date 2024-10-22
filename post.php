@@ -75,8 +75,13 @@ if ($post_id > 0) {
                 <?php if ($comments_result->num_rows > 0): ?>
                     <?php while ($comment = $comments_result->fetch_assoc()): ?>
                         <div class="reply-box">
-                            <div class="reply-meta">Posted by <?php echo htmlspecialchars($comment['com_by']); ?> on <?php echo $comment['com_date']; ?></div>
-                            <div class="reply-content"><?php echo htmlspecialchars($comment['com_content']); ?></div>
+                            <?php echo "Comment by: " . htmlspecialchars($comment['com_by']); ?>
+                            <div class="reply-meta">
+                                Posted by <?php echo htmlspecialchars($comment['com_by']); ?> on <?php echo $comment['com_date']; ?>
+                            </div>
+                            <div class="reply-content">
+                                <?php echo htmlspecialchars($comment['com_content']); ?>
+                            </div>
                         </div>
                     <?php endwhile; ?>
                 <?php else: ?>

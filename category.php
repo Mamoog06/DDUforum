@@ -54,7 +54,7 @@ if ($cat_id > 0) {
             <div class="category-header">
                 <h1><?php echo htmlspecialchars($cat_name); ?></h1>
                 <!-- Example button (if you want to add a "new post" button) -->
-                <a href="newpost.php" class="new-post-btn">New Post</a>
+                <a href="createPost.php" class="new-post-btn">New Post</a>
             </div>
 
             <p class="category-description"><?php echo htmlspecialchars($cat_description); ?></p>
@@ -67,7 +67,7 @@ if ($cat_id > 0) {
                         <div class="topic-box">
                             <div class="topic-meta">
                                 <h2 class="topic-title">
-                                    <a href="threadtemplate.php?post_id=<?php echo $post['post_id']; ?>">
+                                    <a href="post.php?post_id=<?php echo $post['post_id']; ?>">
                                         <?php echo htmlspecialchars($post['post_caption']); ?>
                                     </a>
                                 </h2>
