@@ -67,7 +67,7 @@ if ($cat_id > 0) {
                         <div class="topic-box">
                             <div class="topic-meta">
                                 <h2 class="topic-title">
-                                    <a href="threadtemplate.php?post_id=<?php echo $post['post_id']; ?>">
+                                    <a href="post.php?post_id=<?php echo $post['post_id']; ?>">
                                         <?php echo htmlspecialchars($post['post_caption']); ?>
                                     </a>
                                 </h2>
