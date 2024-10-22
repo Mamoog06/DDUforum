@@ -92,9 +92,9 @@ if (!$player_categories) {
 
     <footer>
         <div class="footer-info">
-            <p>Firmanavn: Marquuefy</p>
+            <p>Firmanavn: ---</p>
             <p>Nummer: 19874198</p>
-            <p>Email: Marqueefy@dnd.dk</p>
+            <p>Email: ---@gmail.com</p>
         </div>
         <div class="footer-social">
             <p>Sociale Medier:</p>
