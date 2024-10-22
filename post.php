@@ -16,7 +16,10 @@ if ($post_id > 0) {
         $post_date = $post['post_date'];
 
         $comments_query = "SELECT * FROM comments WHERE com_post = $post_id ORDER BY com_date ASC";
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
         $comments_result = $conn->query($comments_query);
     } else {
         echo "Post not found.";
