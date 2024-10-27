@@ -24,7 +24,7 @@
         </ul>
     </div>
     <div class="footer-about">
-        <p>About os:</p>
+        <p>About us:</p>
         <p>We are a team of 2 students.</p>
     </div>
 </footer>
