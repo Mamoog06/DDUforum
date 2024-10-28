@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+body {
+  overflow-x: hidden; /* Prevent horizontal scrolling for the body */
+}
+
 .search-container {
   display: flex;
   justify-content: center;
@@ -22,9 +26,8 @@
 .categories {
   display: grid;
   grid-template-columns: 1fr 4fr;
-  width: 100vw;
+  width: 100%;
   margin: 0 auto;
-  overflow-x: hidden;
 }
 
 .side-categories {
@@ -32,33 +35,39 @@
 }
 
 .scrollable-container {
-  overflow-x: auto;
+  overflow-x: auto; /* Keep horizontal scroll for scrolling containers */
   overflow-y: hidden;
   white-space: nowrap;
   cursor: grab;
   user-select: none;
+  width: 100%;
+  max-width: 100%; /* Ensure it doesn't exceed viewport */
 }
 
 .scrollable-container::-webkit-scrollbar {
-  display: none;
-}
-
-.scrollable-container {
-  scrollbar-width: none;
+  display: none; /* Hide scrollbar */
 }
 
 .main-categories {
   display: flex;
+  width: 100%; /* Ensure main categories do not exceed width */
 }
 
 .category {
-  flex: 0 0 225px;
+  flex: 0 0 225px; /* Fixed width for each category */
   padding: 20px;
   background-color: #f9f9f9;
   text-align: center;
   font-size: 18px;
   border: 1px solid #e5e5e5;
   transition: transform 0.1s ease, box-shadow 0.1s ease;
+  user-select: none;
+}
+
+.category a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
 }
 
 .scrollable-container .category:hover {
@@ -68,7 +77,7 @@
 }
 
 .side-category {
-  flex: 0 0 225px;
+  flex: 0 0 225px; /* Fixed width for side categories */
   padding: 20px;
   background-color: #f9f9f9;
   text-align: center;
@@ -84,4 +93,62 @@
 
 .scrollable-container.active {
   cursor: grabbing;
+}
+
+/* Newest Posts Section */
+.newest-posts {
+  padding: 20px;
+}
+
+.newest-posts h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.topic-list {
+  margin-top: 20px;
+}
+
+.topic-box {
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.topic-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.topic-title a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.topic-title a:hover {
+  text-decoration: underline;
+}
+
+.topic-meta {
+  flex-grow: 1;
+}
+
+.topic-meta span {
+  display: block;
+  font-size: 14px;
+  color: #666;
+  margin-top: 3px;
+}
+
+.replies-views {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  font-size: 14px;
+  color: #666;
 }

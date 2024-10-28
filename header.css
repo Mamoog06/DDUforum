@@ -6,12 +6,16 @@ header {
   background-color: #8b0000;
   color: #f2f2f2;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  height: 50px;
 }
 
 header .logo {
-  font-size: 24px;
-  font-weight: bold;
   margin-right: 100px;
+}
+header .logo img {
+  height: 40px;
+  width: auto;
+  max-width: 150px; 
 }
 
 header .actions {
@@ -24,6 +28,7 @@ header .actions .rules,
 header .actions .profile {
   font-size: 16px;
   margin-left: 30px;
+  margin-right: 40px;
 }
 
 header .actions a {
@@ -34,14 +39,67 @@ header .search-container {
   flex-grow: 1;
   max-width: 500px;
   margin-right: auto;
+  height: 45 px;
+  display: flex;
+  align-items: center;
 }
 
 header .search-container input[type="text"] {
   width: 100%;
-  font-size: 20px;
+  font-size: 16px;
   border: none;
   background-color: #8b0000;
   outline: none;
   border-radius: 0;
   box-shadow: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  background-color: inherit;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: inherit;
+  text-decoration: none;
+  text-align: center;
+  width: 100%;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #8b0000;
+  min-width: 130px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  text-align: center;
+}
+
+.dropdown-content a,
+.dropdown-content form button {
+  color: rgb(255, 255, 255);
+  padding: 8px 0;
+  text-decoration: none;
+  display: block;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  text-align: center;
+  width: 100%;
+}
+
+.dropdown-content a:hover, .dropdown-content form button:hover {
+  background-color: #7d0404;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
 }

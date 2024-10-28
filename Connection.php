@@ -1,4 +1,3 @@
-<?php
 $servername = "mysql43.unoeuro.com";
 $username = "ddumarcus_dk";
 $password = "wB9mRzn64GA2yhHrp5Df";
@@ -9,4 +8,3 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
-?>

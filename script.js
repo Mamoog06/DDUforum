@@ -1,32 +1,36 @@
-// script.js
+document.querySelectorAll(".scrollable-container").forEach((container) => {
+  let isDown = false;
+  let startX;
+  let scrollLeft;
 
-document.querySelectorAll('.scrollable-container').forEach(container => {
-    let isDown = false;
-    let startX;
-    let scrollLeft;
+  const startScroll = (e) => {
+    isDown = true;
+    container.classList.add("active");
+    startX = e.pageX || e.touches[0].pageX; // Adjusted to capture the exact position
+    scrollLeft = container.scrollLeft;
+  };
 
-    container.addEventListener('mousedown', (e) => {
-        isDown = true;
-        container.classList.add('active');
-        startX = e.pageX - container.offsetLeft;
-        scrollLeft = container.scrollLeft;
-    });
+  const endScroll = () => {
+    isDown = false;
+    container.classList.remove("active");
+  };
 
-    container.addEventListener('mouseleave', () => {
-        isDown = false;
-        container.classList.remove('active');
-    });
+  const moveScroll = (e) => {
+    if (!isDown) return; // Prevent moving if not clicked
+    e.preventDefault(); // Prevent text selection
+    const x = e.pageX || e.touches[0].pageX; // Adjusted to capture the exact position
+    const walk = (x - startX) * 1; // Calculate distance to scroll
+    container.scrollLeft = scrollLeft - walk; // Apply scroll
+  };
 
-    container.addEventListener('mouseup', () => {
-        isDown = false;
-        container.classList.remove('active');
-    });
+  // Mouse events
+  container.addEventListener("mousedown", startScroll);
+  container.addEventListener("mouseleave", endScroll);
+  container.addEventListener("mouseup", endScroll);
+  container.addEventListener("mousemove", moveScroll);
 
-    container.addEventListener('mousemove', (e) => {
-        if (!isDown) return;
-        e.preventDefault();
-        const x = e.pageX - container.offsetLeft;
-        const walk = (x - startX) * 1;
-        container.scrollLeft = scrollLeft - walk;
-    });
+  // Touch events
+  container.addEventListener("touchstart", startScroll);
+  container.addEventListener("touchend", endScroll);
+  container.addEventListener("touchmove", moveScroll);
 });

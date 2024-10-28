@@ -1,3 +1,8 @@
+<?php
+session_start();
+include 'connection.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,19 +15,7 @@
 </head>
 
 <body>
-    <header>
-        <div class="logo">
-            <a href="index.php" style="text-decoration: none; color: inherit">Logo</a>
-        </div>
-        <div class="search-container">
-            <input type="text" placeholder="Search...">
-        </div>
-        <div class="actions">
-            <div class="profile">
-                <a href="profile.php" style="text-decoration: none; color: inherit">Profile</a>
-            </div>
-        </div>
-    </header>
+    <?php include 'header.php'; ?>
 
     <main>
         <section class="rules-container">

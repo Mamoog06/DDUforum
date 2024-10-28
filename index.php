@@ -2,22 +2,38 @@
 session_start();
 include 'connection.php';
 
-// Check for connection error
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Query for general categories
 $general_categories = $conn->query("SELECT * FROM categories WHERE cat_id BETWEEN 1 AND 7");
 if (!$general_categories) {
     echo "General categories query failed: " . $conn->error;
 }
 
-// Query for player categories
 $player_categories = $conn->query("SELECT * FROM categories WHERE cat_id BETWEEN 8 AND 22");
 if (!$player_categories) {
-    echo "Player categories query failed: " . $conn->error; // Changed message for clarity
+    echo "Player categories query failed: " . $conn->error;
 }
+
+$newest_posts_query = "
+    SELECT 
+        posts.*, 
+        users.user_name, 
+        categories.cat_name, 
+        (SELECT COUNT(*) FROM comments WHERE com_post = posts.post_id) AS reply_count
+    FROM 
+        posts
+    JOIN 
+        users ON posts.post_by = users.user_id
+    JOIN 
+        categories ON posts.post_cat = categories.cat_id
+    ORDER BY 
+        post_date DESC
+    LIMIT 10"; // You can adjust the number of posts to display
+
+$newest_posts_result = $conn->query($newest_posts_query);
+
 ?>
 
 <!DOCTYPE html>
@@ -26,25 +42,13 @@ if (!$player_categories) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forum Homepage</title>
+    <title>Divination & Dragons</title>
     <link rel="stylesheet" href="header.css">
     <link rel="stylesheet" href="home.css">
 </head>
 
 <body>
-    <header>
-        <div class="logo">
-            <a href="index.php" style="text-decoration: none; color: inherit">Logo</a>
-        </div>
-        <div class="actions">
-            <div class="rules">
-                <a href="rules.php" style="text-decoration: none; color: inherit">Rules</a>
-            </div>
-            <div class="profile">
-                <a href="profile.php" style="text-decoration: none; color: inherit">Profile</a>
-            </div>
-        </div>
-    </header>
+    <?php include 'header.php'; ?>
 
     <main>
         <div class="search-container">
@@ -61,7 +65,7 @@ if (!$player_categories) {
                     <?php if ($general_categories->num_rows > 0): ?>
                         <?php while ($category = $general_categories->fetch_assoc()): ?>
                             <div class="category">
-                                <a href="category.php?cat_id=<?php echo $category['cat_id']; ?>"> <!-- Corrected parameter name -->
+                                <a href="category.php?cat_id=<?php echo $category['cat_id']; ?>" style="color: inherit; text-decoaration: none; user-select: none;">
                                     <?php echo htmlspecialchars($category['cat_name']); ?>
                                 </a>
                             </div>
@@ -92,11 +96,40 @@ if (!$player_categories) {
                 </div>
             </div>
         </section>
+
+        <section class="newest-posts">
+            <h2>Newest Posts</h2>
+            <div class="topic-list">
+                <?php if ($newest_posts_result && $newest_posts_result->num_rows > 0): ?>
+                    <?php while ($post = $newest_posts_result->fetch_assoc()): ?>
+                        <div class="topic-box">
+                            <div class="topic-meta">
+                                <h3 class="topic-title">
+                                    <a href="post.php?post_id=<?php echo $post['post_id']; ?>">
+                                        <?php echo htmlspecialchars($post['post_caption']); ?>
+                                    </a>
+                                </h3>
+                                <span>
+                                    Posted by <?php echo htmlspecialchars($post['user_name']); ?>
+                                    in <?php echo htmlspecialchars($post['cat_name']); ?>
+                                    on <?php echo $post['post_date']; ?>
+                                </span>
+                            </div>
+                            <div class="replies-views">
+                                <span>Replies: <?php echo $post['reply_count']; ?></span>
+                            </div>
+                        </div>
+                    <?php endwhile; ?>
+                <?php else: ?>
+                    <p>No recent posts found.</p>
+                <?php endif; ?>
+            </div>
+        </section>
     </main>
 
+    <script src="script.js"></script>
     <?php include 'footer.php'; ?>
 
-    <script src="script.js"></script>
 </body>
 
 </html>

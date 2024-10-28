@@ -42,22 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 
 <body>
-    <header>
-        <div class="logo">
-            <a href="home.php" style="text-decoration: none; color: inherit">Logo</a>
-        </div>
-        <div class="search-container">
-            <input type="text" placeholder="Search...">
-        </div>
-        <div class="actions">
-            <div class="rules">
-                <a href="rules.php" style="text-decoration: none; color: inherit">Rules</a>
-            </div>
-            <div class="profile">
-                <a href="profile.php" style="text-decoration: none; color: inherit">Profile</a>
-            </div>
-        </div>
-    </header>
+    <?php include 'header.php'; ?>
 
     <main>
         <div class="post-container">
@@ -80,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <!-- Tags Field -->
                 <div class="input-group">
                     <label for="tags">Tags:</label>
-                    <input type="text" id="tags" name="tags" placeholder="Add tags..." required>
+                    <input type="text" id="tags" name="tags" placeholder="Add tags...">
                 </div>
 
                 <!-- Post Button -->

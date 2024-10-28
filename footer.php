@@ -10,9 +10,9 @@
    
 <footer>
     <div class="footer-info">
-        <p>Firmanavn: ---</p>
+        <p>Company name: Divination & Dragons</p>
         <p>Nummer: 19874198</p>
-        <p>Email: ---@gmail.com</p>
+        <p>Email: div.n.drag@gmail.com</p>
     </div>
     <div class="footer-social">
         <p>Sociale Medier:</p>
@@ -25,6 +25,6 @@
     </div>
     <div class="footer-about">
         <p>Om os:</p>
-        <p>Information about the company.</p>
+        <p>We are a team of 2  students.</p>
     </div>
 </footer>

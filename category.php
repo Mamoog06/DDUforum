@@ -13,7 +13,20 @@ if ($cat_id > 0) {
         $cat_name = $category['cat_name'];
         $cat_description = $category['cat_description'];
 
-        $posts_query = "SELECT posts.*, users.user_name FROM posts JOIN users ON posts.post_by = users.user_id WHERE post_cat = $cat_id";
+        $posts_query = "
+            SELECT 
+                posts.*, 
+                users.user_name, 
+                (SELECT COUNT(*) FROM comments WHERE com_post = posts.post_id) AS reply_count
+            FROM 
+                posts 
+            JOIN 
+                users ON posts.post_by = users.user_id 
+            WHERE 
+                post_cat = $cat_id 
+            ORDER BY 
+                post_date DESC";
+
         $posts_result = $conn->query($posts_query);
     } else {
         echo "Category not found.";
@@ -38,22 +51,7 @@ if ($cat_id > 0) {
 </head>
 
 <body>
-    <header>
-        <div class="logo">
-            <a href="index.php" style="text-decoration: none; color: inherit">Logo</a>
-        </div>
-        <div class="search-container">
-            <input type="text" placeholder="Search...">
-        </div>
-        <div class="actions">
-            <div class="rules">
-                <a href="rules.php" style="text-decoration: none; color: inherit">Rules</a>
-            </div>
-            <div class="profile">
-                <a href="profile.php" style="text-decoration: none; color: inherit">Profile</a>
-            </div>
-        </div>
-    </header>
+    <?php include 'header.php'; ?>
 
     <main>
         <div class="category-page">
@@ -76,13 +74,10 @@ if ($cat_id > 0) {
                                         <?php echo htmlspecialchars($post['post_caption']); ?>
                                     </a>
                                 </h2>
-                                <!-- Display the username here -->
                                 <span>Posted by <?php echo htmlspecialchars($post['user_name']); ?> on <?php echo $post['post_date']; ?></span>
                             </div>
                             <div class="replies-views">
-                                <!-- You can add post stats like replies and views here -->
-                                <span>Replies: 0</span>
-                                <span>Views: 0</span>
+                                <span>Replies: <?php echo $post['reply_count']; ?></span>
                             </div>
                         </div>
                     <?php endwhile; ?>
@@ -95,9 +90,7 @@ if ($cat_id > 0) {
 
     </main>
 
-    <?php
-    include('footer.php');
-    ?>
+    <?php include('footer.php'); ?>
 
 </body>
 
